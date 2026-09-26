@@ -1,0 +1,6 @@
+rapidfuzz
+pillow
+pyarrow
+python-bidi
+matplotlib
+pandas

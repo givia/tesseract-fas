@@ -1,0 +1,5 @@
+external/
+work/
+__pycache__/
+*.traineddata
+.venv/
