@@ -1,10 +1,13 @@
 # Better Persian (fas) OCR for Tesseract
 
 Fine-tuning Tesseract's `fas` LSTM model, with a reproducible pipeline and an
-honest evaluation. The result, `fas_print`, is packaged for
+honest evaluation. The result, `fas_print`, is submitted to
 [tesseract-ocr/tessdata_contrib](https://github.com/tesseract-ocr/tessdata_contrib)
-in `dist/tessdata_contrib/fas_print/` (model card there); the bugs found on
-the way are written up in `docs/upstream/`.
+as [PR #19](https://github.com/tesseract-ocr/tessdata_contrib/pull/19)
+(model card in `dist/tessdata_contrib/fas_print/`); the bugs found on the way
+are filed upstream, see `docs/upstream/README.md` for the list
+(tesseract#4627/#4628 SIGFPE, tesseract#4629 reading direction,
+tesstrain#430/#431, langdata_lstm#66).
 
 ## Why the stock model needs work
 

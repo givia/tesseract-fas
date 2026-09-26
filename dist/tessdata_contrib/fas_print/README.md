@@ -143,7 +143,7 @@ and B Yas.
   tesstrain's 90/10 train/eval split (338,184 / 37,577 line images), final
   checkpoint (training-eval BCER 1.28%).
 - The WordStr box writer was patched to keep ZWNJ and not to mirror brackets
-  (tesseract-ocr/tesstrain PR: `generate_wordstr_box.py`); with the stock
+  (tesseract-ocr/tesstrain#430); with the stock
   writer a fine-tuned model unlearns ZWNJ and reverses brackets.
 - `fast/` is the same checkpoint converted with `lstmtraining --convert_to_int`.
 - The whole pipeline (corpus normalization, rendering, real-line cutting and
@@ -159,7 +159,7 @@ and B Yas.
   character edits against 259 for the stock model; with the direction fixed
   it is 189. Single-column pages are unaffected. Workarounds: `-l fas+fas_print`
   (the stock model, listed first, sets the direction; twice as slow), or
-  Tesseract built with tesseract-ocr/tesseract PR #… and
+  Tesseract built with tesseract-ocr/tesseract#4629 and
   `-c tessedit_right_to_left=1`.
 - Spacing and ZWNJ are the largest remaining error class on real books
   (see *Evaluation*).

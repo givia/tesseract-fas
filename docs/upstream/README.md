@@ -1,21 +1,17 @@
-# Upstream contributions (drafts, not yet submitted)
+# Upstream contributions
 
-Each item below is ready to file from your GitHub account (`gh` is not
-installed here, so filing is a browser job). Evidence and reproduction files
-live in this repo; numbers come from `scripts/evaluate.py`.
+The texts below are what was filed on 2026-09-26. Evidence and reproduction
+files live in this repo; numbers come from `scripts/evaluate.py`.
 
-| # | Where | Type | Status |
+| # | Where | Type | Filed as |
 |---|---|---|---|
-| 1 | tesseract-ocr/tesstrain | PR: RTL/Indic WordStr labels drop ZWJ/ZWNJ and mirror brackets | patch ready: `tesstrain-wordstr-bidi.patch` |
-| 2 | tesseract-ocr/tesstrain | PR: `$(ALL_LSTMF)` recipe fails when the output dir does not exist | one-line fix below |
-| 3 | tesseract-ocr/tesseract#4582 | Comment: image repro + measured impact, `textord_noise_rejrows` is the culprit | draft below, image in `repro/` |
-| 4 | tesseract-ocr/langdata_lstm | Issue: `fas` data problems (comma forbidden, Arabic yeh/kaf, bidi controls) | draft below |
-| 5 | tesseract-ocr/tesseract | Issue + PR: SIGFPE in `Textord::CleanupSingleRowResult` (float overflow) | root cause found, patch tested: `tesseract-cleanup-single-row-overflow.patch` |
-| 6 | tesseract-ocr/tesseract | PR: `tessedit_right_to_left` parameter (models with Latin letters are laid out LTR) | patch ready: `tesseract-right-to-left-param.patch`, evidence below |
-| 7 | tesseract-ocr/tessdata_contrib | PR: `fas_print`, the fine-tuned Persian model | package ready in `dist/tessdata_contrib/fas_print/` |
-
-Suggested order: 5 (issue first, PR referencing it), 1, 2, 6, 3, 4, 7. Item 7's
-model card links to items 3, 5 and 6 by their numbers once they exist.
+| 1 | tesseract-ocr/tesstrain | PR: RTL/Indic WordStr labels drop ZWJ/ZWNJ and mirror brackets | [tesstrain#430](https://github.com/tesseract-ocr/tesstrain/pull/430), patch `tesstrain-wordstr-bidi.patch` |
+| 2 | tesseract-ocr/tesstrain | PR: `$(ALL_LSTMF)` recipe fails when the output dir does not exist | [tesstrain#431](https://github.com/tesseract-ocr/tesstrain/pull/431) |
+| 3 | tesseract-ocr/tesseract#4582 | Comment: image repro + measured impact, `textord_noise_rejrows` is the culprit | [comment](https://github.com/tesseract-ocr/tesseract/issues/4582#issuecomment-5849064524), image in `repro/` |
+| 4 | tesseract-ocr/langdata_lstm | Issue: `fas` data problems (comma forbidden, Arabic yeh/kaf, bidi controls) | [langdata_lstm#66](https://github.com/tesseract-ocr/langdata_lstm/issues/66) |
+| 5 | tesseract-ocr/tesseract | Issue + PR: SIGFPE in `Textord::CleanupSingleRowResult` (float overflow) | [tesseract#4627](https://github.com/tesseract-ocr/tesseract/issues/4627), [tesseract#4628](https://github.com/tesseract-ocr/tesseract/pull/4628), patch `tesseract-cleanup-single-row-overflow.patch` |
+| 6 | tesseract-ocr/tesseract | PR: `tessedit_right_to_left` parameter (models with Latin letters are laid out LTR) | [tesseract#4629](https://github.com/tesseract-ocr/tesseract/pull/4629), patch `tesseract-right-to-left-param.patch` |
+| 7 | tesseract-ocr/tessdata_contrib | PR: `fas_print`, the fine-tuned Persian model | [tessdata_contrib#19](https://github.com/tesseract-ocr/tessdata_contrib/pull/19); package in `dist/tessdata_contrib/fas_print/` |
 
 ---
 
@@ -203,7 +199,7 @@ tag; the image in `repro/sigfpe-fas-fast.png` reads fine afterwards).
 > Persian, Arabic, Urdu or Hebrew documents need for the English words and
 > product names in them, comes out *left-to-right*: 52 Latin letters outnumber
 > the 30–45 letters of the RTL script. Our fine-tuned Persian model
-> (`fas_print`, tessdata_contrib PR #…) has 53 L vs 46 R/AL/AN unichars and is
+> (`fas_print`, https://github.com/givia/tesseract-fas) has 53 L vs 46 R/AL/AN unichars and is
 > therefore laid out LTR by `ColumnFinder` (no `ReflectForRtl`), and
 > `PageIterator::Orientation` reports `WRITING_DIRECTION_LEFT_TO_RIGHT` for
 > its blocks. Stock `fas` (95 unichars, 1 L) is RTL, so the user-visible
@@ -261,7 +257,7 @@ tag; the image in `repro/sigfpe-fas-fast.png` reads fine afterwards).
 > `best/` is the float model, `fast/` the integer conversion. The README is
 > the model card: training data and their licences, evaluation, known
 > limitations (multi-column pages are laid out left-to-right until
-> tesseract-ocr/tesseract#… is merged, workaround given) and reproduction
+> tesseract-ocr/tesseract#4629 is merged, workaround given) and reproduction
 > (pipeline at https://github.com/givia/tesseract-fas).
 
 Files: `dist/tessdata_contrib/fas_print/{README.md,best/fas_print.traineddata,fast/fas_print.traineddata}`.
